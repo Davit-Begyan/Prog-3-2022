@@ -1,34 +1,30 @@
 var matrix = []; 
-var rows = prompt("Շարքեր\nՆորմալ = 30"); 
-var columns = prompt("Սյուներ\nՆորմալ = 40"); 
-var side = prompt("Մեծություն(35 փոքր):\nՆորմալ = 20 կամ 25");
-if (side >=34){
-    alert("Եթե ներմուծես 35 բարձր վատ կաշխատի:")
-    var side = prompt("Մեծություն(35 փոքր)\nՆորմալ = 20 կամ 25:");
-    }
+var rows = 30; 
+var columns = 40; 
+var side = 20;
 
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-      }
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+    }
 
 
 for (var y = 0; y < rows; y++) {
 matrix[y] = []; 
 for (var x = 0; x < columns; x++) {
 var a = getRandomInt(100);
-if (a >= 0 && a < 10) {
+if (a >= 0 && a < 20) {
 matrix[y][x] = 0; 
 }
-if (a >= 10 && a < 65) {
+if (a >= 20 && a < 78) {
 matrix[y][x] = 1; 
 }
-else if (a >= 65 && a < 75) {
+else if (a >= 78 && a < 88) {
 matrix[y][x] = 2; 
 }
-else if (a >= 75 && a < 97) {
+else if (a >= 88 && a < 98) {
 matrix[y][x] = 3; 
 }
-else if (a >= 97 && a < 99) {
+else if (a >= 98 && a < 99) {
 matrix[y][x] = 4; 
 }
 else if (a >= 99 && a < 100) {
@@ -129,5 +125,6 @@ function draw() {
         gameArr[i].eat()
         gameArr[i].move()
         gameArr[i].mult()
+        gameArr[i].die()
     }
 }
