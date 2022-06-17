@@ -1,32 +1,17 @@
-class Game_over extends LivingCreatureV2 {
+let LivingCreatureV2 = require('./LivingCreature')
+
+module.exports = class Game_over extends LivingCreatureV2 {
     
     constructor(x, y, energy){
         super(x, y, energy);
         this.energy = energy;
     }
-
-    chooseCell(character) {
-        this.getNewDirections()
-        var found = []
-        for (var i in this.directions) {
-            var x = this.directions[i][0]
-            var y = this.directions[i][1]
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    found.push(this.directions[i])
-                }
-            }
-
-        }
-        return found;
-
-    }
-
     mult() {
-        var empty = random(this.chooseCell(0))
-        if (empty && this.energy > 350) {
-            var newX = empty[0]
-            var newY = empty[1]
+        var emptyCells = super.chooseCell(0);
+		var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
+        if (newCell && this.energy > 350) {
+            var newX = newCell[0]
+            var newY = newCell[1]
             matrix[newY][newX] = 5
             var gm = new Game_over(newX, newY, 400)
             gameArr.push(gm)
@@ -34,11 +19,12 @@ class Game_over extends LivingCreatureV2 {
     }
 
     move() {
-        var empty = random(this.chooseCell(0))
+        var emptyCells = super.chooseCell(0);
+		var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
         this.energy += 2;
-        if (empty) {
-            var newX = empty[0]
-            var newY = empty[1]
+        if (newCell) {
+            var newX = newCell[0]
+            var newY = newCell[1]
             matrix[newY][newX] = 5
             matrix[this.y][this.x] = 0
 
@@ -48,14 +34,11 @@ class Game_over extends LivingCreatureV2 {
     }
 
     eat() {
-        var food1 = this.chooseCell(1)
-        var food3 = this.chooseCell(3)
-        var food4 = this.chooseCell(4)
-        var food2 = this.chooseCell(2)
-        var food = random(food1.concat(food3, food2, food4));
-        if (food) {
-            var newX = food[0]
-            var newY = food[1]
+        var AngelCells = super.chooseCell(5);
+        var newCell = AngelCells[Math.floor(Math.random() * AngelCells.length)]
+        if (newCell) {
+            var newX = newCell[0]
+            var newY = newCell[1]
             matrix[newY][newX] = 4
             matrix[this.y][this.x] = 0
 
